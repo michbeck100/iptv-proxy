@@ -50,7 +50,6 @@ type ProxyConfig struct {
 	XtreamGenerateApiGet bool
 	M3UCacheExpiration   int
 	M3UFileName          string
-	M3u4uUrl             string
 	CustomEndpoint       string
 	CustomId             string
 	RemoteURL            *url.URL

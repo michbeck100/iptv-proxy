@@ -83,7 +83,6 @@ var rootCmd = &cobra.Command{
 			AdvertisedPort:       viper.GetInt("advertised-port"),
 			HTTPS:                viper.GetBool("https"),
 			M3UFileName:          viper.GetString("m3u-file-name"),
-			M3u4uUrl:             viper.GetString("m3u4u-url"),
 			CustomEndpoint:       viper.GetString("custom-endpoint"),
 			CustomId:             viper.GetString("custom-id"),
 			XtreamGenerateApiGet: viper.GetBool("xtream-api-get"),

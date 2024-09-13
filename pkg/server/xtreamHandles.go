@@ -141,20 +141,21 @@ func (c *Config) xtreamGetAuto(ctx *gin.Context) {
 }
 
 func (c *Config) xtreamGet(ctx *gin.Context) {
-	rawURL := fmt.Sprintf("%s/get.php?username=%s&password=%s", c.XtreamBaseURL, c.XtreamUser, c.XtreamPassword)
+	rawURL := ""
+	if c.RemoteURL.Host == "m3u4u.com" {
+		rawURL = c.RemoteURL.String()
+	} else {
+		rawURL = fmt.Sprintf("%s/get.php?username=%s&password=%s", c.XtreamBaseURL, c.XtreamUser, c.XtreamPassword)
 
-	q := ctx.Request.URL.Query()
+		q := ctx.Request.URL.Query()
 
-	for k, v := range q {
-		if k == "username" || k == "password" {
-			continue
+		for k, v := range q {
+			if k == "username" || k == "password" {
+				continue
+			}
+
+			rawURL = fmt.Sprintf("%s&%s=%s", rawURL, k, strings.Join(v, ","))
 		}
-
-		rawURL = fmt.Sprintf("%s&%s=%s", rawURL, k, strings.Join(v, ","))
-	}
-
-	if c.M3u4uUrl != "" {
-		rawURL = c.M3u4uUrl
 	}
 
 	m3uURL, err := url.Parse(rawURL)
