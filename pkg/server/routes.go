@@ -30,7 +30,7 @@ func (c *Config) routes(r *gin.RouterGroup) {
 	r = r.Group(c.CustomEndpoint)
 
 	//Xtream service endopoints
-	if c.ProxyConfig.XtreamBaseURL != "" {
+	if c.ProxyConfig.XtreamBaseURL != "" || c.RemoteURL.Host == "m3u4u.com" {
 		c.xtreamRoutes(r)
 		if strings.Contains(c.XtreamBaseURL, c.RemoteURL.Host) &&
 			c.XtreamUser.String() == c.RemoteURL.Query().Get("username") &&
