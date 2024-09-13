@@ -153,6 +153,10 @@ func (c *Config) xtreamGet(ctx *gin.Context) {
 		rawURL = fmt.Sprintf("%s&%s=%s", rawURL, k, strings.Join(v, ","))
 	}
 
+	if c.M3u4uUrl != "" {
+		rawURL = c.M3u4uUrl
+	}
+
 	m3uURL, err := url.Parse(rawURL)
 	if err != nil {
 		ctx.AbortWithError(http.StatusInternalServerError, err) // nolint: errcheck
